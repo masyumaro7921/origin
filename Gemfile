@@ -70,6 +70,3 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # devise
   gem 'devise', '~> 4.2'
 
-# manage sort order
-  gem 'acts_as_list', '~> 0.9.19'
-  
