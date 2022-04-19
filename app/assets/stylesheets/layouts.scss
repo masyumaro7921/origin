@@ -7,9 +7,10 @@ main {
 
 footer {
   height: 50px;
+  background: linear-gradient(to right, blue, pink);
 }
 
 .bg-home {
-  background-color: #1e90ff;
+  background: radial-gradient(red, blue);
 }
 
