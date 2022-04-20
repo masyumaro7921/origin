@@ -1,18 +1,15 @@
 class GoalsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_goal, only: [:show, :edit, :update, :destroy]
 
   # GET /goals
   def index
-    @goals = Goal.all
-  end
-
-  # GET /goals/1
-  def show
+    @goals = current_user.goals_all
   end
 
   # GET /goals/new
   def new
-    @goal = Goal.new
+    @goal = current_user.goals_new
   end
 
   # GET /goals/1/edit
@@ -21,37 +18,37 @@ class GoalsController < ApplicationController
 
   # POST /goals
   def create
-    @goal = Goal.new(goal_params)
+    @goal = current_user. goal.new(goal_params)
 
     if @goal.save
-      redirect_to @goal, notice: 'Goal was successfully created.'
+    @status = trus
     else
-      render :new
+    @status = false
     end
   end
 
   # PATCH/PUT /goals/1
   def update
     if @goal.update(goal_params)
-      redirect_to @goal, notice: 'Goal was successfully updated.'
+      @status
     else
-      render :edit
+      @status = false
     end
   end
 
   # DELETE /goals/1
   def destroy
     @goal.destroy
-    redirect_to goals_url, notice: 'Goal was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_goal
-      @goal = Goal.find(params[:id])
-    end
+  
+  def set_goal
 
-    # Only allow a trusted parameter "white list" through.
+    @goal = current_user.goals.find_by(id: params[:id])
+    redirect_to(goals_url, alert: "ERROR!!") if @goal.blank?
+  end
+
     def goal_params
       params.require(:goal).permit(:title, :user_id)
     end
