@@ -4,12 +4,16 @@ class GoalsController < ApplicationController
 
   # GET /goals
   def index
-    @goals = current_user.goals_all
+    @goals = Goal.all
+  end
+  
+ # GET /goals/1
+  def show
   end
 
   # GET /goals/new
   def new
-    @goal = current_user.goals_new
+    @goal = Goal.new
   end
 
   # GET /goals/1/edit
@@ -18,35 +22,33 @@ class GoalsController < ApplicationController
 
   # POST /goals
   def create
-    @goal = current_user. goal.new(goal_params)
-
+    @goal = @goal = Goal.new(goal_params)
     if @goal.save
-    @status = trus
+    redirect_to @goal, notice: 'Goal was successfully created.'
     else
-    @status = false
+    render :new
     end
   end
 
   # PATCH/PUT /goals/1
   def update
     if @goal.update(goal_params)
-      @status
+      redirect_to @goal, notice: 'Goal was successfully updated.'
     else
-      @status = false
+      render :edit
     end
   end
 
   # DELETE /goals/1
   def destroy
     @goal.destroy
+    redirect_to goals_url, notice: 'Goal was successfully destroyed.'
   end
 
   private
   
   def set_goal
-
-    @goal = current_user.goals.find_by(id: params[:id])
-    redirect_to(goals_url, alert: "ERROR!!") if @goal.blank?
+  @goal = Goal.find(params[:id])
   end
 
     def goal_params
