@@ -23,6 +23,7 @@ class GoalsController < ApplicationController
   # POST /goals
   def create
     @goal = @goal = Goal.new(goal_params)
+    @goal.user_id = current_user.id
     if @goal.save
     redirect_to @goal, notice: 'Goal was successfully created.'
     else
