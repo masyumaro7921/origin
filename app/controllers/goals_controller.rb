@@ -55,3 +55,12 @@ class GoalsController < ApplicationController
       params.require(:goal).permit(:title, :user_id)
     end
 end
+
+　　def edit
+  @book = Book.find(params[:id])
+  if @book.user == current_user
+  render "edit"
+  else
+  redirect_to books_path
+  end
+  end　　
